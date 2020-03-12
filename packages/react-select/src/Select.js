@@ -1326,7 +1326,7 @@ export default class Select extends Component<Props, State> {
           const children = items
             .map((child, i) => {
               const option = toOption(child, `${itemIndex}-${i}`);
-              if (option) acc.focusable.push(child);
+              if (option && !option.isDisabled) acc.focusable.push(child);
               return option;
             })
             .filter(Boolean);
@@ -1341,10 +1341,10 @@ export default class Select extends Component<Props, State> {
           }
         } else {
           const option = toOption(item, `${itemIndex}`);
-          if (option) {
+          if (option && !option.isDisabled) {
             acc.render.push(option);
-            acc.focusable.push(item);
           }
+          acc.focusable.push(item);
         }
         return acc;
       },
